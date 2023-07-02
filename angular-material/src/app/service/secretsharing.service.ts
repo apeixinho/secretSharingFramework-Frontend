@@ -19,14 +19,14 @@ export class SecretsharingService {
   constructor(private httpClient: HttpClient) {}
 
 
-  emitData(data) {
+  emitData(data: SecretShare[]) {
     this.observer.next(data);
   }
 
 
   splitSecret(k: number, n: number, secret: String): Observable<SecretShare[]> {
 
-    console.log(`\nthreshold: ${k}\ntotalShares: ${k}\nSecret: ${secret}`);
+    // console.log(`\nthreshold: ${k}\ntotalShares: ${k}\nSecret: ${secret}`);
 
     const uriPath = `${this.apiEndpoint}/splitSecret?k=${k}&n=${n}&secret=${secret}`;
     const options = {
