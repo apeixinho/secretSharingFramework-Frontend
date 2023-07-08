@@ -20,6 +20,8 @@ export class SplitSecretComponent implements OnInit {
 
   splitShares: SecretShare[] = [];
 
+  splitServerError: Boolean = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private secretSharingService: SecretsharingService
@@ -71,11 +73,17 @@ export class SplitSecretComponent implements OnInit {
         'secret'
       )?.value;
 
-      this.secretSharingService.splitSecret(k, n, secret).subscribe((data) => {
-        this.splitShares = data;
-        // console.log('Secret Shares (Split) = ' + JSON.stringify(data));
-        if (this.splitShares){
-          this.secretSharingService.emitData(this.splitShares);
+      this.secretSharingService.splitSecret(k,n,secret).subscribe({
+        next: (data: SecretShare[]) => {
+          this.splitShares = data;
+          // console.log('Secret Shares (Split) = ' + JSON.stringify(data));
+          if (this.splitShares){
+            this.secretSharingService.emitData(this.splitShares);
+          }
+        },
+        error: (error) => {
+          this.splitServerError = true;
+          console.log(JSON.stringify(error));
         }
       });
     }

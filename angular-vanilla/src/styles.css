@@ -185,7 +185,7 @@ ul {
 
 .form {
   width: 90vw;
-  max-width: var(--fixed-width);
+  max-width: var(--max-width);
   background: var(--white);
   border-radius: var(--borderRadius);
   box-shadow: var(--shadow-2);
@@ -309,6 +309,7 @@ table {
 
 /* Default Table Style */
 table {
+
   color: var(--primary-900);
   background: var(white);
   border: 1px solid var(--primary-900);
